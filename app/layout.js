@@ -12,20 +12,28 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+  if (!publishableKey) {
+    console.error("❌ Clerk publishable key is missing. Check your .env.local file.");
+  } else {
+    console.log("✅ Clerk publishable key loaded successfully.");
+  }
+
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={publishableKey}>
       <html lang="en">
         <head>
           <link rel="icon" href="/logo-sm.png" sizes="any" />
         </head>
-        <body className={`${inter.className}`}>
+        <body className={inter.className}>
           <Header />
           <main className="min-h-screen">{children}</main>
           <Toaster richColors />
 
           <footer className="bg-blue-50 py-12">
             <div className="container mx-auto px-4 text-center text-gray-600">
-              <p>Made with 💗 by RoadsideCoder</p>
+              <p>Made with 💗 by Harshith</p>
             </div>
           </footer>
         </body>
