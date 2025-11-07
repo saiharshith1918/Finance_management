@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: ai-finance-app
+    restart: always
+    ports:
+      - "3001:3001"
+    env_file: .env
+    depends_on:
+      - db
+    command: sh -c "npx prisma migrate deploy && npm run start"
+
+  db:
+    image: postgres:16-alpine
+    container_name: finance-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: finance
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
