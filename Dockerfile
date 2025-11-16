@@ -16,6 +16,8 @@ COPY . .
 # 6️⃣ Generate Prisma client
 RUN npx prisma generate || echo "Skipping prisma generate"
 
+ARG NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+ENV NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 # 7️⃣ Build Next.js app
 RUN npm run build
 

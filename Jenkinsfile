@@ -12,11 +12,12 @@ pipeline {
       }
     }
 
-    stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t harshith1918/finance-app:latest .'
-      }
-    }
+stage('Build Docker Image') {
+  steps {
+    sh 'docker build --build-arg NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_ZGFybGluZy1wZWxpY2FuLTM2LmNsZXJrLmFjY291bnRzLmRldiQ -t harshith1918/finance-app:latest .'
+  }
+}
+
 
     stage('Login to DockerHub') {
       steps {
